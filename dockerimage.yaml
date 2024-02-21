@@ -1,0 +1,81 @@
+apiVersion: v1
+
+
+
+kind: Pod
+
+
+
+metadata:
+
+
+
+   name: dockerimage
+
+
+
+   namespace: mohammedsalemabdellahi
+
+
+
+   labels:
+
+
+
+     app: docker
+
+
+
+     version: 0.0.3
+
+
+
+spec:
+
+
+
+   containers:
+
+
+
+   - name: docker
+
+
+
+     image: ghcr.io/horizon-school-of-digital-technologies/simple-webapp-color:latest
+
+
+
+     resources:
+
+
+
+       requests:
+
+
+
+         memory: "64Mi"
+
+
+
+         cpu: "250m"
+
+
+
+       limits:
+
+
+
+         memory: "128Mi"
+
+
+
+         cpu: "500m"
+
+
+
+     ports:
+
+
+
+     - containerPort: 8080
