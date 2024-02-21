@@ -4,60 +4,74 @@ kind: ReplicaSet
 
 metadata:
 
-   name: docker
+  name: docker
 
-   labels:
+  namespace: mohammedsalemabdellahi
 
-     app: docker
+  labels:
 
-     version: 0.0.3
+    app: docker
+
+    version: 0.0.3
 
 spec:
 
-   replicas: 3
+  replicas: 3
 
-   selector:
+  selector:
 
-     matchLabels:
+    matchLabels:
 
-       app: docker
+      app: docker
 
-       version: 0.0.3
+  template:
 
-   template:
+    metadata:
 
-      metadata:
+      name: docker
 
-       name: docker
+      labels:
 
-       labels:
+        app: docker
 
-         app: docker
+        version: 0.0.3
 
-         version: 0.0.3
+    spec:
 
-      spec:
+      containers:
 
-        containers:
+      - name: docker
 
-        - name: docker
+        image: docker: 0.0.3
 
-          image:  docker:0.0.3
+        resources:
 
-          resources:
+          requests:
 
-            requests:
+            memory: "64Mi"
 
-              memory: "64Mi"
+            cpu: "250m"
 
-              cpu: "250m"
+          limits:
 
-            limits:
+            memory: "64Mi"
 
-              memory: "64Mi"
+            cpu: "250m"
 
-              cpu: "250m"
+        ports:
 
-          ports:
+        - containerPort: 80
 
-          - containerPort: 80
+        volumeMounts:          
+
+        - name: data-volume
+
+          mountPath: /tmp/data  
+
+  volumes:                     
+
+  - name: data-volume
+
+    persistentVolumeClaim:
+
+      claimName: my-pvc
