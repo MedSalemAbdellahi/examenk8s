@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+
+kind: ReplicaSet
+
+metadata:
+
+   name: docker
+
+   labels:
+
+     app: docker
+
+     version: 0.0.3
+
+spec:
+
+   replicas: 3
+
+   selector:
+
+     matchLabels:
+
+       app: docker
+
+       version: 0.0.3
+
+   template:
+
+      metadata:
+
+       name: docker
+
+       labels:
+
+         app: docker
+
+         version: 0.0.3
+
+      spec:
+
+        containers:
+
+        - name: docker
+
+          image:  docker:0.0.3
+
+          resources:
+
+            requests:
+
+              memory: "64Mi"
+
+              cpu: "250m"
+
+            limits:
+
+              memory: "64Mi"
+
+              cpu: "250m"
+
+          ports:
+
+          - containerPort: 80
